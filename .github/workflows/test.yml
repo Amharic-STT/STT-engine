@@ -1,0 +1,11 @@
+name: dummy-actions
+on: [push]
+jobs:
+  run:
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: Dummy PR
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          echo "success"
