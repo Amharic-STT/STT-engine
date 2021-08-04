@@ -1,7 +1,8 @@
 import math, random
 import torch
 class Resize_duration:
-    
+    def __init__(self):
+        pass
     #Load an audio file. Return the signal as a tensor and the sample rate
     def open(audio_file):
         sig, sr = torchaudio.load(audio_file)
