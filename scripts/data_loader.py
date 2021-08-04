@@ -6,9 +6,10 @@ import os
 
 class DataLoader:
 
-    def __init__(self, train_audio_folder, train_script_file_path):
+    def __init__(self, train_audio_folder, train_script_file_path, sr=8000):
         self.train_audio_folder = train_audio_folder
         self.train_script_file_path = train_script_file_path
+        self.sr = sr
 
     def extract_transcription_and_labels(self):
 
@@ -52,7 +53,7 @@ class DataLoader:
             if len(list(wav_dict.keys())) >= max_lenght:
                 break
             wav, sample_rate = librosa.load(
-                self.train_audio_folder+path, sr=8000)
+                self.train_audio_folder+path, sr=self.sr)
             dur = float(len(wav)/sample_rate)
             channel = len(wav.shape)
             label = path.split(".")[0]
