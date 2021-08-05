@@ -10,3 +10,23 @@ Structure
 ├── notebooks
 ├── tests
 └── Dockerfile
+
+# Contributors
+
+* [Azaria Tamrat](https://github.com/Azariagmt)
+* [Bethelhem Sisay](https://github.com/Bethelsis)
+* [Daniel Zelalem](https://github.com/daniEL2371)
+* [Dorothy Cheruiyot](https://github.com/Doro97)
+* [Eliphaz Niyodusenga]()
+* [Elizabeth Nanjala]()
+* [Natneal Teshome](https://github.com/Natty-star)
+* [UWASE Rachel](https://github.com/ntabanarachel)
+* [Yosef Alemneh](https://github.com/mozartofmath)
+
+
+
+
+
+
+
+
