@@ -46,8 +46,8 @@ class DataGenerator:
         padded_audios_np = np.zeros(
             (len(batch_audios), maximum_audio_len), dtype="int64")
 
-        label_length = np.zeros((self.batch_size, 1), dtype="int64")
-        input_length = np.zeros((self.batch_size, 1), dtype="int64")
+        label_length = np.zeros(padded_audios_np.shape[0], dtype="int64")
+        input_length = np.zeros(encoded_trans_np.shape[0], dtype="int64")
 
         ind = 0
         for trans, audio in zip(encoded_trans, batch_audios):
