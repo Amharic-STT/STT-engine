@@ -44,7 +44,7 @@ class DataGenerator:
         encoded_trans_np = np.zeros(
             (len(encoded_trans), maximum_trans_len), dtype="int64")
         padded_audios_np = np.zeros(
-            (len(batch_audios), maximum_audio_len), dtype="int64")
+            (len(batch_audios), maximum_audio_len), dtype="float32")
 
         label_length = np.zeros(padded_audios_np.shape[0], dtype="int64")
         input_length = np.zeros(encoded_trans_np.shape[0], dtype="int64")
