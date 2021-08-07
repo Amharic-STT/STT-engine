@@ -6,9 +6,25 @@
 
 <p>Our responsibility was to build a deep learning model that is capable of transcribing a speech to text in the Amharic language. The model we produce will be accurate and is robust against background noise.</p>
 
-## Code
-The code of our analysis can be found in the **notebooks** folder. The data preprocessing and visualization parts can be found in the **Amharic_STT_preprocessing.ipynb** jupyter notebook. This notebook can be run in google colab. The trained models will be stored in the **models** folder.
 
-## Dependencies
-To install the necessary dependencies, execute the command 
-```$ pip install -r requirements.txt"```
+Structure
+├── logs
+├── modules
+├── notebooks
+├── tests
+└── Dockerfile
+
+# Contributors
+
+* [Azaria Tamrat](https://github.com/Azariagmt)
+* [Bethelhem Sisay](https://github.com/Bethelsis)
+* [Daniel Zelalem](https://github.com/daniEL2371)
+* [Dorothy Cheruiyot](https://github.com/Doro97)
+* [Eliphaz Niyodusenga]()
+* [Elizabeth Nanjala]()
+* [Natneal Teshome](https://github.com/Natty-star)
+* [UWASE Rachel](https://github.com/ntabanarachel)
+* [Yosef Alemneh](https://github.com/mozartofmath)
+
+
+
