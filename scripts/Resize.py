@@ -32,7 +32,8 @@ class AudioUtil():
       pad_end = torch.zeros((num_rows, pad_end_len))
 
       sig = torch.cat((pad_begin, sig, pad_end), 1)
-    def resize_audios_mono(audios : dict, max_length : int) -> dict:
+    return (sig, sr)
+  def resize_audios_mono(audios : dict, max_length : int) -> dict:
       """
       Here we pad the sampled audio with zeros so tha all of the sampled audios 
       have equal length
@@ -51,11 +52,9 @@ class AudioUtil():
                               mode = 'constant')
       return audios
 
-    resize_audios_mono(audio_files, maximum_length)
-    print(audio_files[demo_audio].shape)
-        return (sig, sr)
+        
 
-      def resize_all(self, df, sm=10000):
+  def resize_all(self, df, sm=10000):
         sig_list = []
         sr_list = []
         for i in range(len(df)):
@@ -66,5 +65,5 @@ class AudioUtil():
           sr_list.append(sr)
         return sig_list, sr_list
 
-      def play_audio(self, samples, sample_rate):
+  def play_audio(self, samples, sample_rate):
           return ipd.Audio(samples, rate=sample_rate)
