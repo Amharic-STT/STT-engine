@@ -22,7 +22,7 @@ class FeatureExtraction:
 
         mfcc_features = {}
         for audio in audios:
-            mfcc_features[audio] = librosa.feature.mfcc(audios[audio], sr=sample_rate)
+            mfcc_features[audio] = librosa.feature.mfcc(audios[audio][0], sr=sample_rate)
         return mfcc_features
 
     def save_mfcc_spectrograms(self, mfccs: dict, path: str) -> int:
