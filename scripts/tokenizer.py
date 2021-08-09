@@ -20,7 +20,7 @@ class Tokenizer:
 
         return int_to_char, char_to_int
 
-    def encode_text(self, sent, char_to_int):
+    def encode(self, sent, char_to_int):
 
         encoded = []
         char_list = list(sent)

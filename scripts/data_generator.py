@@ -1,24 +1,30 @@
 from tokenizer import Tokenizer
 import numpy as np
+import tensorflow as tf
 
 
-class DataGenerator:
-
-    def __init__(self, translations, audios, batch_size):
+class DataGenerator(tf.keras.utils.Sequence):
+    def __init__(self,  translations, audios, batch_size=32, shuffle=True):
         self.audios = audios
-        self.translations = translations
+        self.labels = translations
         self.batch_size = batch_size
+        self.len = int(np.floor(len(self.labels) / self.batch_size))
+        self.shuffle = shuffle
+        self.on_epoch_end()
 
         self.tokenizer = Tokenizer(translations)
         self.int_to_char, self.char_to_int = self.tokenizer.build_dict()
 
         self.cur_index = 0
 
+    def __len__(self):
+        return self.len
+
     def encode_text(self, translations):
         encoded_trans = []
 
         for t in translations:
-            encoded = self.tokenizer.encode_text(t, self.char_to_int)
+            encoded = self.tokenizer.encode(t, self.char_to_int)
             encoded_trans.append(encoded)
 
         return encoded_trans
@@ -31,11 +37,9 @@ class DataGenerator:
 
         return maximum
 
-    def get_batch(self, index):
+    def __data_generation(self, batch_translations, batch_audios):
 
-        batch_translations = self.translations[index: index + self.batch_size]
-        batch_audios = self.audios[index: index + self.batch_size]
-
+        self.cur_index = 0
         encoded_trans = self.encode_text(batch_translations)
 
         maximum_trans_len = self.get_max_len(encoded_trans)
@@ -52,27 +56,54 @@ class DataGenerator:
         ind = 0
         for trans, audio in zip(encoded_trans, batch_audios):
             encoded_trans_np[ind, 0:len(trans)] = trans
-            label_length[ind, ] = len(trans)
+            label_length[ind] = len(trans)
 
             padded_audio = np.pad(
                 audio, (0, maximum_audio_len - len(audio)), mode='constant', constant_values=0)
+
             padded_audios_np[ind, ] = padded_audio
-            input_length[ind, ] = len(audio)
+            input_length[ind] = len(audio)
 
             ind += 1
 
         outputs = {'ctc': np.zeros([self.batch_size])}
-        inputs = {'the_input': padded_audios_np,
-                  'the_labels': encoded_trans_np,
-                  'input_length': input_length,
-                  'label_length': label_length
+        inputs = {'the_input':   tf.convert_to_tensor(padded_audios_np),
+                  'the_labels':   tf.convert_to_tensor(encoded_trans_np),
+                  'input_length':   tf.convert_to_tensor(input_length),
+                  'label_length':   tf.convert_to_tensor(label_length)
                   }
 
         return (inputs, outputs)
 
-    def get_next_batch(self):
+    def on_epoch_end(self):
 
-        batch_data = self.get_batch(self.cur_index)
+        self.indexes = np.arange(self.len*self.batch_size)
+
+        if self.shuffle == True:
+
+            self.indexes = self.indexes.reshape(
+                int(self.len), int(self.batch_size))
+            np.random.shuffle(self.indexes)
+
+            for i in range(self.len):
+                np.random.shuffle(self.indexes[i])
+
+            self.indexes = self.indexes.reshape(int(self.len*self.batch_size))
+
+    def __getitem__(self, index):
+        indexes = self.indexes[int(index*self.batch_size):int((index+1)*self.batch_size)]
+
         self.cur_index += self.batch_size
 
-        return batch_data
+        if self.cur_index >= len(self.labels):
+            self.cur_index = 0
+
+        batch_labels = [self.labels[int(k)] for k in indexes]
+        batch_audios = [self.audios[int(k)] for k in indexes]
+
+        batch_labels = self.labels[self.cur_index:
+                                   self.cur_index + self.batch_size]
+        batch_audios = self.audios[self.cur_index:
+                                   self.cur_index + self.batch_size]
+
+        return self.__data_generation(batch_labels, batch_audios)
