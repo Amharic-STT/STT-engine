@@ -1,13 +1,9 @@
 import torch.nn.functional as F
 from torch.nn import init
 
-# ----------------------------
-# Audio Classification Model
-# ----------------------------
+
 class AudioClassifier (nn.Module):
-    # ----------------------------
-    # Build the model architecture
-    # ----------------------------
+    
     def __init__(self):
         super().__init__()
         conv_layers = []
@@ -48,17 +44,14 @@ class AudioClassifier (nn.Module):
         self.ap = nn.AdaptiveAvgPool2d(output_size=1)
         self.lin = nn.Linear(in_features=64, out_features=10)
 
-        # Wrap the Convolutional Blocks
+        
         self.conv = nn.Sequential(*conv_layers)
  
-    # ----------------------------
-    # Forward pass computations
-    # ----------------------------
+    
     def forward(self, x):
-        # Run the convolutional blocks
+       
         x = self.conv(x)
 
-        # Adaptive pool and flatten for input to linear layer
         x = self.ap(x)
         x = x.view(x.shape[0], -1)
 
@@ -72,5 +65,5 @@ class AudioClassifier (nn.Module):
 myModel = AudioClassifier()
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 myModel = myModel.to(device)
-# Check that it is on Cuda
+
 next(myModel.parameters()).device
