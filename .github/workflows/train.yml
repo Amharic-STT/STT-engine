@@ -1,9 +1,6 @@
 name: train-model
 
-on:
-  push:
-    branches:
-      - "train"
+on: [push]
 
 jobs:
   train:
