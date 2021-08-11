@@ -17,10 +17,10 @@ jobs:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
       - name: cml_run
+          
         run: |
-          pip install -r requirements.txt
-	        dvc repro
-          git fetch prune
-          dvc metrics diff --show-md staging > report.md
-
-	        cml-send-comment report.md
+		pip install -r requirements.txt
+		dvc repro
+		git fetch prune
+		dvc metrics diff --show-md-staging >report.md
+		cml-send-comment report.md
