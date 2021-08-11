@@ -14,8 +14,8 @@ jobs:
         run: |
           # Post reports as comments in GitHub PRs
           nvidia-smi >> report.md
+          sudo apt install libasound2-dev python-dev python-numpy python-setuptools libsndfile-dev
           pip install -r requirements.txt
-          pip install soundfile
           sudo apt update
           dvc pull data
           dvc repro
