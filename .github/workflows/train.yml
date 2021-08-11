@@ -19,8 +19,5 @@ jobs:
       - name: cml_run
           
         run: |
-          pip install -r requirements.txt
-          dvc pull -aT data --run-cache
-          git fetch prune
-          dvc metrics diff --show-md staging > report.md
+          echo "Hello do you work?" >> report.md
           cml-send-comment report.md
