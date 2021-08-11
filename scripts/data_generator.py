@@ -93,17 +93,10 @@ class DataGenerator(tf.keras.utils.Sequence):
     def __getitem__(self, index):
         indexes = self.indexes[int(index*self.batch_size):int((index+1)*self.batch_size)]
 
-        self.cur_index += self.batch_size
-
-        if self.cur_index >= len(self.labels):
-            self.cur_index = 0
 
         batch_labels = [self.labels[int(k)] for k in indexes]
         batch_audios = [self.audios[int(k)] for k in indexes]
 
-        batch_labels = self.labels[self.cur_index:
-                                   self.cur_index + self.batch_size]
-        batch_audios = self.audios[self.cur_index:
-                                   self.cur_index + self.batch_size]
+      
 
         return self.__data_generation(batch_labels, batch_audios)

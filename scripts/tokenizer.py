@@ -37,7 +37,7 @@ class Tokenizer:
         decoded = ''
         for e in encoded_chars:
             try:
-                decoded += e
+                decoded += int_to_char[e]
 
             except KeyError:
                 decoded += ''
