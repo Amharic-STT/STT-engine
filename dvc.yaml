@@ -6,7 +6,7 @@ stages:
   train:
     cmd: ["python3 ./scripts/train.py"]
     deps:
-    - train.py
+    - ./scripts/train.py
     - ./data
     outs:
     - prediction.txt
