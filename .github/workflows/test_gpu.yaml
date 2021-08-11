@@ -1,0 +1,15 @@
+name: your-workflow-name
+on: [push]
+jobs:
+  run:
+    runs-on: [self-hosted, cml, gpu]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: iterative/setup-cml@v1
+      - name: Write CML report
+        env:
+          REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Post reports as comments in GitHub PRs
+          nvidia-smi >> report.md
+          cml-send-comment report.md
