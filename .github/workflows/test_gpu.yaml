@@ -16,7 +16,7 @@ jobs:
           nvidia-smi >> report.md
           pip install -r requirements.txt
           pip install soundfile
-          sudo apt-get install libsndfile1-dev
+          sudo apt update
           dvc pull data
           dvc repro
           git fetch prune
