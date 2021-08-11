@@ -1,0 +1,26 @@
+schema: '2.0'
+stages:
+  install_requirements:
+    cmd: pip3 install -r requirements.txt
+    deps:
+    - path: requirements.txt
+      md5: 355a4d492eb3ce554c1b42ff2dbea391
+      size: 251
+  train:
+    cmd:
+    - python3 ./scripts/train.py
+    deps:
+    - path: ./data
+      md5: 0482446076c63ee87c4a2fd58e77dcc9.dir
+      size: 20618614073
+      nfiles: 38001
+    - path: train.py
+      md5: aa3a029d753ed048f62c49c6290ae70a
+      size: 3935
+    outs:
+    - path: metrics.json
+      md5: 6a43012e4745d0dafa01cac604836f22
+      size: 12
+    - path: prediction.txt
+      md5: 865865e14d992c8caf58125f6fdad107
+      size: 158

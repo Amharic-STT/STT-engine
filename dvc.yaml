@@ -1,0 +1,15 @@
+stages:
+  install_requirements:
+    cmd: pip3 install -r requirements.txt
+    deps:
+    - requirements.txt
+  train:
+    cmd: ["python3 ./scripts/train.py"]
+    deps:
+    - train.py
+    - ./data
+    outs:
+    - prediction.txt
+    metrics:
+    - metrics.json:
+        cache: false
