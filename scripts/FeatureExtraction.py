@@ -59,10 +59,11 @@ class FeatureExtraction:
             fig.add_axes(ax)
             librosa.display.specshow(mfccs[audio], sr=sample_rate, x_axis='time')
             try:
-                plt.savefig(path+f'{audio}.png', dpi = 100)
+                plt.savefig(path+f'{audio}.png')
             except FileNotFoundError:
                 raise FileNotFoundError(f'The directory {path} does not exist')
             fig.clear()
+            plt.close(fig)
         return 0
 
     def save_mel_spectrograms(self, audios: dict, sample_rate: int, path: str) -> int:
@@ -91,7 +92,7 @@ class FeatureExtraction:
             raise TypeError("""argument mfccs must be of type dict and argument path
                             must be of type string (str)""")
         for audio in audios:
-            X = librosa.stft(audios[audio])
+            X = librosa.stft(audios[audio], n_fft = 512)
             Xdb = librosa.amplitude_to_db(abs(X))
             fig, ax = plt.subplots()
             ax = plt.Axes(fig, [0., 0., 1., 1.])
@@ -99,8 +100,9 @@ class FeatureExtraction:
             fig.add_axes(ax)
             librosa.display.specshow(Xdb, sr=sample_rate, x_axis='time', y_axis='hz')
             try:
-                plt.savefig(path+f'{audio}.png', dpi = 100)
+                plt.savefig(path+f'{audio}.png')
             except FileNotFoundError:
                 raise FileNotFoundError(f'The directory {path} does not exist')
             fig.clear()
+            plt.close(fig)
         return 0
