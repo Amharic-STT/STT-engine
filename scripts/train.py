@@ -59,7 +59,7 @@ print(model.summary())
 
 data_batch_size = 50
 training_batch_size = 12
-number_of_epochs = 1
+number_of_epochs = 2
 
 number_of_batches = math.ceil(len(mfcc_features)/data_batch_size)
 
