@@ -8,6 +8,9 @@ jobs:
       - uses: iterative/setup-cml@v1
       - uses: actions/setup-python@v2
       - uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-activate-base: true
+          activate-environment: ""
       - uses: s-weigand/setup-conda@v1
       - name: Write CML report
         env:
