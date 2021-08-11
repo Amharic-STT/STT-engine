@@ -8,7 +8,6 @@ from models import model_1, model_2, model_3
 
 import librosa   #for audio processing
 import librosa.display
-import IPython.display as ipd
 import matplotlib.pyplot as plt
 import numpy as np
 import warnings
@@ -54,21 +53,21 @@ print(model.summary())
 
 import math
 
-data_batch_size = 9
-training_batch_size = 9
+data_batch_size = 100
+training_batch_size = 25
 number_of_epochs = 100
 
 number_of_batches = math.ceil(len(mfcc_features)/data_batch_size)
 
 for i in range(number_of_epochs):
     for j in range(number_of_batches):
-        print(f'Epoch {i+1}: training batch {j}')
+        print('Epoch {}: training batch {}'.format(i+1,j))
         X_train, y_train = load_spectrograms_with_transcripts_in_batches(mfcc_features, 
                                                               enc_aug_transcripts, data_batch_size, j,
                                                               '../data/train/mel_spectros/')
         history = model.fit([X_train, y_train], batch_size = training_batch_size, epochs = 1)
-with mlflow.start_run() as run:
-    mlflow.log_metric("ctc_loss", history.history['loss'][-1])
+# with mlflow.start_run() as run:
+#     mlflow.log_metric("ctc_loss", history.history['loss'][-1])
 
 predicted = model.predict([X_train,y_train])
 predicted_trans = decode_predicted(predicted, char_encoder)

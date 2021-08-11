@@ -29,7 +29,7 @@ def load_audio_files(path : str, sampling_rate : int, to_mono : bool) -> (dict, 
     i+=1
     if i%20 == 0:
       print('loaded',i,'audio files')
-    if i == 100:
+    if i == 1000:
       break
   return audio_files, max_length
 
@@ -75,7 +75,7 @@ def load_spectrograms_with_transcripts(mfcc_features : dict, encoded_transcripts
   X_train = []
   y_train = []
   for audio in mfcc_features:
-    specgram = image.imread(path+f'{audio}.png')
+    specgram = image.imread(path+'{}.png'.format(audio))
     X_train.append(specgram)
     y_train.append(encoded_transcripts[audio])
   return np.array(X_train), np.array(y_train)
@@ -105,7 +105,7 @@ def load_spectrograms_with_transcripts_in_batches(mfcc_features : dict, encoded_
   i = batch_size*batch_no
   j = batch_size*(batch_no + 1)
   for audio in audio_names[i:j]:
-    specgram = image.imread(path+f'{audio}.png')
+    specgram = image.imread(path+'{}.png'.format(audio))
     X_train.append(specgram)
     y_train.append(encoded_transcripts[audio])
   return np.array(X_train), np.array(y_train)
