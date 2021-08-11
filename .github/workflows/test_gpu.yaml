@@ -15,7 +15,7 @@ jobs:
           # Post reports as comments in GitHub PRs
           nvidia-smi >> report.md
           pip install -r requirements.txt
-          dvc pull -aT data --run-cache
+          dvc pull -aT data
           dvc repro
           git fetch prune
           cml-send-comment report.md
