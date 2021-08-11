@@ -1,9 +1,7 @@
-name: train-model
-
+name: your-workflow-name
 on: [push]
-
 jobs:
-  train:
+  run:
     runs-on: [self-hosted, cml, gpu]
     steps:
       - uses: actions/checkout@v2
@@ -13,8 +11,8 @@ jobs:
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
-      - name: cml_run
-          
+      - name: cml_run  
         run: |
-          echo "Hello do you work?" >> report.md
+          # Post reports as comments in GitHub PRs
+          nvidia-smi >> report.md
           cml-send-comment report.md
