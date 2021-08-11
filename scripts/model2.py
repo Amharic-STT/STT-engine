@@ -6,6 +6,8 @@ import tensorflow as tf
 from tensorflow.keras.layers import *
 from tensorflow.keras import backend as K
 
+from logspectrorgam import LogMelSpectrogram
+
 
 def simple_rnn_model(input_dim, output_dim=224):
 
@@ -107,3 +109,23 @@ def CNN_net(n_mels):
 
     model = Model(inputs=input_data, outputs=y, name="cnn")
     return model, model.output.shape
+
+
+def preprocessin_model(sample_rate, fft_size, frame_step, n_mels, mfcc=False):
+
+    input_data = Input(name='input', shape=(None,), dtype="float32")
+    featLayer = LogMelSpectrogram(
+        fft_size=fft_size,
+        hop_size=frame_step,
+        n_mels=n_mels,
+
+        sample_rate=sample_rate,
+        f_min=0.0,
+
+        f_max=int(sample_rate / 2),
+    )(input_data)
+
+    x = BatchNormalization(axis=2)(featLayer)
+    model = Model(inputs=input_data, outputs=x, name="preprocessin_model")
+
+    return model
