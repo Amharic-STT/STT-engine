@@ -1,8 +1,6 @@
 import tensorflow as tf
-from tensorflow.keras.models import Model, Sequential
+from tensorflow.keras.models import Model
 from tensorflow.keras.layers import *
-from tensorflow.keras.preprocessing.sequence import pad_sequences
-from tensorflow.keras.optimizers import SGD, Adam, RMSprop
 from tensorflow.keras import backend as K
 
 

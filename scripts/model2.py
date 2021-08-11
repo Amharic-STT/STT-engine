@@ -1,10 +1,8 @@
 from tensorflow.keras.layers import *
-from tensorflow.keras.models import Model, Sequential
-from collections import Counter
+from tensorflow.keras.models import Model
 
 import tensorflow as tf
 from tensorflow.keras.layers import *
-from tensorflow.keras import backend as K
 
 from logspectrorgam import LogMelSpectrogram
 
