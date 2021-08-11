@@ -6,10 +6,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: iterative/setup-cml@v1
+      - uses: actions/setup-python@v2
       - name: Write CML report
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
         run: |
           # Post reports as comments in GitHub PRs
           nvidia-smi >> report.md
+          pip install -r requirements.txt
+          dvc repro
+          git fetch prune
           cml-send-comment report.md
