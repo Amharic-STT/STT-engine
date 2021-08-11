@@ -1,6 +1,9 @@
 name: train-model
 
-on: [push]
+on:
+  push:
+    branches:
+      - "train"
 
 jobs:
   train:
@@ -16,10 +19,8 @@ jobs:
       - name: cml_run
         run: |
           pip install -r requirements.txt
-	  dvc repro
-          
-
+	        dvc repro
           git fetch prune
           dvc metrics diff --show-md staging > report.md
 
-	  cml-send-comment report.md
+	        cml-send-comment report.md
