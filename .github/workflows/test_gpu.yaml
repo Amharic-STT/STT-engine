@@ -14,7 +14,7 @@ jobs:
         run: |
           # Post reports as comments in GitHub PRs
           nvidia-smi >> report.md
-          pip install requirements.txt
+          pip install -r requirements.txt
           dvc repro
           git fetch prune
           cml-send-comment report.md
