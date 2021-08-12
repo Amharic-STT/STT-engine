@@ -62,6 +62,7 @@ class FeatureExtraction:
                 plt.savefig(path+f'{audio}.png')
             except FileNotFoundError:
                 raise FileNotFoundError(f'The directory {path} does not exist')
+
             fig.clear()
             plt.close(fig)
         return 0
@@ -103,6 +104,7 @@ class FeatureExtraction:
                 plt.savefig(path+f'{audio}.png')
             except FileNotFoundError:
                 raise FileNotFoundError(f'The directory {path} does not exist')
+
             fig.clear()
             plt.close(fig)
         return 0
