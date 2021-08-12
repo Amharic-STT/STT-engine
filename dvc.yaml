@@ -4,7 +4,7 @@ stages:
     deps:
     - requirements.txt
   train:
-    cmd: ["python3 ./scripts/train.py"]
+    cmd: ["python3 ./scripts/train_whole.py"]
     deps:
     - ./scripts/train.py
     - ./data
