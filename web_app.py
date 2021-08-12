@@ -3,12 +3,12 @@ import awesome_streamlit as ast
 import scripts.pages.recorded_audio
 import scripts.pages.record_audio
 import scripts.pages.home
-import scripts.pages.visualizations
+import scripts.pages.model_summary
 
 # create the pages
 PAGES = {
     "Home" : scripts.pages.home,
-    "Visualizations" : scripts.pages.visualizations,
+    "Model Summary" : scripts.pages.model_summary,
     "Choose Audio": scripts.pages.recorded_audio,
     "Record your own voice": scripts.pages.record_audio,
     
