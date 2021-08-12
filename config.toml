@@ -12,13 +12,6 @@ disableWatchdogWarning = false
 # Default: "off"
 sharingMode = "off"
 
-# If True, will show a warning when you run a Streamlit-enabled script via "python my_script.py".
-# Default: true
-showWarningOnDirectExecution = true
-
-# Level of logging: 'error', 'warning', 'info', or 'debug'.
-# Default: 'info'
-logLevel = "debug"
 
 
 [client]
@@ -91,40 +84,4 @@ gatherUsageStats = true
 # Default: whatever value is set in server.port.
 serverPort = 80
 
-[s3]
 
-# Name of the AWS S3 bucket to save apps.
-# Default: (unset)
-# bucket =
-
-# URL root for external view of Streamlit apps.
-# Default: (unset)
-# url =
-
-# Access key to write to the S3 bucket.
-# Leave unset if you want to use an AWS profile.
-# Default: (unset)
-# accessKeyId =
-
-# Secret access key to write to the S3 bucket.
-# Leave unset if you want to use an AWS profile.
-# Default: (unset)
-#secretAccessKey =
-
-# Make the shared app visible only to users who have been granted view permission. If you are interested in this option, contact us at support@streamlit.io.
-# Default: false
-# requireLoginToView = false
-
-# The "subdirectory" within the S3 bucket where to save apps.
-# S3 calls paths "keys" which is why the keyPrefix is like a subdirectory. Use "" to mean the root directory.
-# Default: ""
-keyPrefix = ""
-
-# AWS region where the bucket is located, e.g. "us-west-2".
-# Default: (unset)
-# region =
-
-# AWS credentials profile to use.
-# Leave unset to use your default profile.
-# Default: (unset)
-# profile =
