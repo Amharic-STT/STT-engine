@@ -9,3 +9,4 @@ scipy==1.6.2
 python_speech_features
 tensorflow-gpu
 mlflow
+jiwer
