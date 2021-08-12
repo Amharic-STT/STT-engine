@@ -17,11 +17,11 @@ import mlflow
 import mlflow.keras
 import os
 import logging
-len(os.listdir('../../ALFFA_PUBLIC/ASR/AMHARIC/data/train/wav/'))
+len(os.listdir('./data/train/wav/'))
 
 sample_rate = 44100
 
-audio_files, maximum_length = load_audio_files('../../ALFFA_PUBLIC/ASR/AMHARIC/data/train/wav/', sample_rate, True)
+audio_files, maximum_length = load_audio_files('./data/train/wav/', sample_rate, True)
 logging.info('loaded audio files')
 
 print("The longest audio is", maximum_length/sample_rate, 'seconds long')
@@ -87,3 +87,12 @@ for i in range(len(y_test)):
     print("pridicted:",predicted_trans[i])
     print("actual:",real_trans[i])
     print("word error rate:", wer(real_trans[i], predicted_trans[i]))
+    
+WER = wer(predicted_trans[0], real_trans[0])
+
+with open("metrics.json", 'w') as outfile:
+    json.dump({"WER": WER}, outfile)
+
+with open("prediction.txt", 'w') as outfile:
+    outfile.write("Predicted: {}".format(predicted_trans[0]))
+    outfile.write("Actual: {}".format(real_trans[0]))
