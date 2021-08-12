@@ -20,5 +20,5 @@ jobs:
           dvc pull data
           dvc repro
           git fetch --prune
-          dvc metrics diff --show-md model >> report.md
+          dvc metrics diff --show-md staging >> report.md
           cml-send-comment report.md
