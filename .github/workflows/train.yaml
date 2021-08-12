@@ -5,7 +5,7 @@ on:
       - 'train'
 jobs:
   run:
-    runs-on: [self-hosted, cml, gpu]
+    runs-on: [self-hosted, gpu, aws]
     steps:
       - uses: actions/checkout@v2
       - uses: iterative/setup-cml@v1
