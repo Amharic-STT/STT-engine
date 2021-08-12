@@ -1,5 +1,8 @@
-name: your-workflow-name
-on: [push]
+name: train-model
+on:
+  push:
+    branches:
+      - train
 jobs:
   run:
     runs-on: [self-hosted, cml, gpu]
