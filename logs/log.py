@@ -1,19 +1,26 @@
 #importing the module 
-import logging 
 
-# Create and configure logger 
-logging.basicConfig(filename="app.log", 
-					format='%(asctime)s %(message)s', 
-					filemode='w') 
+import logging
+import sys
+from logging.handlers import TimedRotatingFileHandler
+FORMATTER = logging.Formatter(
+    "%(asctime)s — %(name)s — %(levelname)s — %(message)s")
+LOG_FILE = "app.log"
 
-# Create an object 
-logger=logging.getLogger() 
+def get_console_handler():
+    console_handler = logging.StreamHandler(sys.stdout)
+    console_handler.setFormatter(FORMATTER)
+    return console_handler
 
-#Set the threshold of logger to DEBUG 
-logger.setLevel(logging.DEBUG) 
+def get_file_handler():
+    file_handler = TimedRotatingFileHandler(LOG_FILE, when='midnight')
+    file_handler.setFormatter(FORMATTER)
+    return file_handler
 
-
-logger.debug("This is just a harmless debug message") 
-logger.info("This is just an information for you") 
-logger.warning("OOPS!!!Its a Warning")  
-logger.critical("The Internet is not working....") 
+def get_logger(logger_name):
+    logger = logging.getLogger(logger_name)
+    logger.setLevel(logging.DEBUG)
+    logger.addHandler(get_console_handler())
+    logger.addHandler(get_file_handler())
+    logger.propagate = False
+    return logger
