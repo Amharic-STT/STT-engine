@@ -17,6 +17,7 @@ import mlflow
 import mlflow.keras
 import logging
 import json
+from jiwer import wer
 len(os.listdir('./data/train/wav/'))
 
 sample_rate = 8000
@@ -80,8 +81,10 @@ real_trans = [''.join(char_encoder.inverse_transform(y)) for y in y_train]
 print("pridicted:", predicted_trans[0])
 print("actual:", real_trans[0])
 
+WER = wer(predicted_trans[0], real_trans[0])
+
 with open("metrics.json", 'w') as outfile:
-    json.dump({"WER": 0.2}, outfile)
+    json.dump({"WER": WER}, outfile)
 
 with open("prediction.txt", 'w') as outfile:
     outfile.write("Predicted: {}".format(predicted_trans[0]))
