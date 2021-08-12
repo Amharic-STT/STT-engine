@@ -14,6 +14,8 @@ ENV PYTHONDONTWRITEBYTECODE=1
 # Turns off buffering for easier container logging
 ENV PYTHONUNBUFFERED=1
 
+RUN apt-get update
+RUN apt install libasound2-dev python-dev python-numpy python-setuptools libsndfile-dev
 # Install pip requirements
 COPY requirements.txt .
 RUN python -m pip install -r requirements.txt
