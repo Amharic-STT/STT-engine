@@ -13,3 +13,4 @@ mlflow
 awesome-streamlit
 pydub
 sounddevice
+wavio
