@@ -29,7 +29,7 @@ print("max length", maximum_length)
 
 demo_audio = list(audio_files.keys())[0]
 
-transcripts = load_transcripts("../data/train/trsTrain.txt")
+transcripts = load_transcripts("./data/train/trsTrain.txt")
 logging.info('loaded transcripts')
 
 audio_files = resize_audios_mono(audio_files, 440295)
@@ -46,7 +46,7 @@ print('model summary')
 #model = my_model(char_encoder, maximum_length)
 import tensorflow as tf
 from new_model import LogMelgramLayer, CTCLayer
-model = tf.keras.models.load_model('../models/new_model_v1_2000.h5', 
+model = tf.keras.models.load_model('./models/new_model_v1_6000.h5', 
                                     custom_objects = {
                                         'LogMelgramLayer': LogMelgramLayer ,
                                         'CTCLayer': CTCLayer}
@@ -67,14 +67,14 @@ X_val, y_val = X_train[-10:], y_train[-10:]
 X_test, y_test = X_train[:10], y_train[:10]#X_train[-20:-10], y_train[-20:-10]
 X_train, y_train = X_train[:-20], y_train[:-20]
 
-mlflow.set_tracking_uri('../')
+mlflow.set_tracking_uri('./')
 mlflow.keras.autolog()
 
 history = model.fit([X_train, y_train], 
                     validation_data = [X_val, y_val], 
                     batch_size = 25, epochs = 100)
 
-model.save('../models/new_model_v1_10000.h5')
+model.save('./models/new_model_v1_10000.h5')
 
 # with mlflow.start_run() as run:
 #     mlflow.log_metric("ctc_loss", history.history['loss'][-1])
