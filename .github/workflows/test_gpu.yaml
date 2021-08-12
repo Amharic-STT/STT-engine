@@ -20,5 +20,4 @@ jobs:
           sudo apt update
           dvc pull data
           dvc repro
-          git fetch prune
           cml-send-comment report.md
