@@ -68,7 +68,7 @@ for i in range(number_of_epochs):
         print('Epoch {}: training batch {}'.format(i+1, j))
         X_train, y_train = load_spectrograms_with_transcripts_in_batches(mfcc_features,
                                                                          enc_aug_transcripts, data_batch_size, j,
-                                                                         './data/train/mel_spectros/')
+                                                                         './mel_spectros/')
         history = model.fit([X_train, y_train],
                             batch_size=training_batch_size, epochs=1)
 # with mlflow.start_run() as run:
