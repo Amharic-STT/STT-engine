@@ -17,7 +17,8 @@ ENV PYTHONUNBUFFERED=1
 RUN apt-get update -y && apt-get install -y --no-install-recommends build-essential gcc \
                                         libsndfile1 
                                    
-RUN apt-get install libportaudio2 -y                               
+RUN apt-get install libportaudio2 -y
+RUN apt install ffmpeg -y
 # Install pip requirements
 COPY requirements.txt .
 RUN python -m pip install -r requirements.txt
