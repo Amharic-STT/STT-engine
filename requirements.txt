@@ -10,3 +10,6 @@ scipy
 python_speech_features
 tensorflow
 mlflow
+awesome_streamlit
+pydub
+sounddevice
