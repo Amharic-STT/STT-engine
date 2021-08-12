@@ -33,7 +33,7 @@ def load_audio_files(path : str, sampling_rate : int, to_mono : bool) -> (dict, 
     i+=1
     if i%20 == 0:
       print('loaded',i,'audio files')
-    if i == 12000:
+    if i == 300:
       break
   return audio_files, max_length
 
