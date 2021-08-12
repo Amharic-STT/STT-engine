@@ -43,10 +43,10 @@ feature_extractor = FeatureExtraction()
 mfcc_features = feature_extractor.extract_features(audio_files, sample_rate)
 
 feature_extractor.save_mfcc_spectrograms(
-    mfcc_features, sample_rate, './data/train/mfcc_spectros/')
+    mfcc_features, sample_rate, './mfcc_spectros/')
 print('Saved mfcc spectros')
 feature_extractor.save_mel_spectrograms(
-    audio_files, sample_rate, './data/train/mel_spectros/')
+    audio_files, sample_rate, './mel_spectros/')
 print('saved mel spectros')
 
 char_encoder = fit_label_encoder(transcripts)
