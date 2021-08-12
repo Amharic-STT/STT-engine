@@ -62,7 +62,9 @@ class FeatureExtraction:
                 plt.savefig(path+f'{audio}.png')
             except FileNotFoundError:
                 raise FileNotFoundError(f'The directory {path} does not exist')
-            plt.close()
+
+            fig.clear()
+            plt.close(fig)
         return 0
 
     def save_mel_spectrograms(self, audios: dict, sample_rate: int, path: str) -> int:
@@ -102,5 +104,7 @@ class FeatureExtraction:
                 plt.savefig(path+f'{audio}.png')
             except FileNotFoundError:
                 raise FileNotFoundError(f'The directory {path} does not exist')
-            plt.close()
+
+            fig.clear()
+            plt.close(fig)
         return 0

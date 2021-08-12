@@ -1,4 +1,4 @@
-import librosa   #for audio processing
+import librosa  # for audio processing
 import numpy as np
 from matplotlib import image
 import os

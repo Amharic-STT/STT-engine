@@ -1,3 +1,4 @@
+import math
 import sys
 
 from dataset_loader import load_audio_files, load_transcripts, load_spectrograms_with_transcripts, load_spectrograms_with_transcripts_in_batches
@@ -6,7 +7,7 @@ from FeatureExtraction import FeatureExtraction
 from transcript_encoder import fit_label_encoder, encode_transcripts, decode_predicted
 from models import model_1, model_2, model_3, model_4
 
-import librosa   #for audio processing
+import librosa  # for audio processing
 import librosa.display
 import matplotlib.pyplot as plt
 import numpy as np
@@ -15,19 +16,24 @@ import mlflow
 import mlflow.keras
 import os
 import logging
-len(os.listdir('../../ALFFA_PUBLIC/ASR/AMHARIC/data/train/wav/'))
+
+import json
+from jiwer import wer
+len(os.listdir('./data/train/wav/'))
 
 sample_rate = 8000
 
-# audio_files, maximum_length = load_audio_files('../../ALFFA_PUBLIC/ASR/AMHARIC/data/train/wav/', sample_rate, True)
-# logging.info('loaded audio files')
+audio_files, maximum_length = load_audio_files(
+    './data/train/wav/', sample_rate, True)
+logging.info('loaded audio files')
+
 
 # print("The longest audio is", maximum_length/sample_rate, 'seconds long')
 # print("max length", maximum_length)
 
 # demo_audio = list(audio_files.keys())[0]
 
-transcripts = load_transcripts("../data/train/trsTrain.txt")
+transcripts = load_transcripts("./data/train/trsTrain.txt")
 logging.info('loaded transcripts')
 
 # audio_files = resize_audios_mono(audio_files, maximum_length)
@@ -49,6 +55,7 @@ mfcc_features = {}
 for audio in audios:
     mfcc_features[audio] = 1
 
+
 char_encoder = fit_label_encoder(transcripts)
 transcripts_encoded = encode_transcripts(transcripts, char_encoder)
 enc_aug_transcripts = equalize_transcript_dimension(mfcc_features, transcripts_encoded, 60)
@@ -57,11 +64,12 @@ print('model summary')
 model = model_3(char_encoder)
 print(model.summary())
 
-import math
+
 
 data_batch_size = 100
 training_batch_size = 10
 number_of_epochs = 150
+
 
 number_of_batches = math.ceil(len(mfcc_features)/data_batch_size)
 
@@ -89,3 +97,12 @@ real_trans = [''.join(char_encoder.inverse_transform(y)) for y in y_test]
 for i in range(5):
     print("pridicted:",predicted_trans[i])
     print("actual:",real_trans[i])
+
+WER = wer(predicted_trans[0], real_trans[0])
+
+with open("metrics.json", 'w') as outfile:
+    json.dump({"WER": WER}, outfile)
+
+with open("prediction.txt", 'w') as outfile:
+    outfile.write("Predicted: {}".format(predicted_trans[0]))
+    outfile.write("Actual: {}".format(real_trans[0]))
