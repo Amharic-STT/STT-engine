@@ -13,11 +13,12 @@ jobs:
           GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
         run: |
           # Post reports as comments in GitHub PRs
-          nvidia-smi >> report.md
           sudo apt-get update
           sudo apt install libasound2-dev python-dev python-numpy python-setuptools libsndfile-dev
           pip install -r requirements.txt
           sudo apt update
           dvc pull data
           dvc repro
+          git fetch --prune
+          dvc metrics diff --show-md model >> report.md
           cml-send-comment report.md
