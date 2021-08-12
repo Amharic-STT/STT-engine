@@ -2,7 +2,7 @@ name: train-model
 on:
   push:
     branches:
-      - train
+      - 'train'
 jobs:
   run:
     runs-on: [self-hosted, cml, gpu]
