@@ -24,3 +24,5 @@
 **/secrets.dev.yaml
 **/values.dev.yaml
 README.md
+./data
+./training-data
