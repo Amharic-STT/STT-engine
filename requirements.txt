@@ -7,6 +7,6 @@ streamlit
 librosa==0.8.1
 scipy==1.6.2
 python_speech_features
-tensorflow==2.2
+tensorflow
 mlflow
 jiwer
