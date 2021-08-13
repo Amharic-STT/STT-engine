@@ -24,5 +24,5 @@ WORKDIR /app
 COPY . /app
 
 # During debugging, this entry point will be overridden. For more information, please refer to https://aka.ms/vscode-docker-python-debug
-CMD ["python", "-m", "streamlit.cli", "run", "main.py", "--server.port=8000"]
+CMD ["python", "-m", "streamlit.cli", "run", "web_app.py", "--server.port=8000"]
 EXPOSE 8000
